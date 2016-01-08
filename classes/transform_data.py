@@ -46,11 +46,29 @@ def transform_trips(df):
     # Create hour column
     df['hour'] = df['starttime'].map(lambda x: x.hour)
 
+    # rename starttime
+    df = df.rename(columns={'starttime': 'datetime'})
+
+    # Remove closed station and pronto shop
+    df = df.ix[(~df['from_station_id'].isin(['Pronto shop', 'UW-01'])) & (~df['to_station_id'].isin(['Pronto shop', 'UW-01'])), :]
+
     return df
 
 
+def add_cluster(df_t, df_c):
+    df = df_t.merge(df_c[['dockcount', 'elevation', 'cluster', 'ecosystem', 'terminal']], left_on='from_station_id', right_on='terminal',  how='left')
+    df.drop('terminal', axis=1, inplace=True)
+    df = df.merge(df_c[['terminal', 'cluster', 'ecosystem']], left_on='to_station_id', right_on='terminal', suffixes=['_from', '_to'])
+    df.drop('terminal', axis=1, inplace=True)
+
+    return df
+
 if __name__ == '__main__':
-    # df = pd.read_table('open_data_year_one/hw.txt', sep=' ', error_bad_lines=False, index_col=False)
-    # print transform_weather(df)
-    df = pd.read_csv('open_data_year_one/2015_trip_data.csv')
-    print transform_trips(df)
+    # df_w = pd.read_table('../data/raw/hw.txt', sep=' ', error_bad_lines=False, index_col=False)
+    # transform_weather(df_w).to_csv('../data/cleaned/cleaned_weather.csv', index=False)
+
+    df_t = pd.read_csv('../data/raw/2015_trip_data.csv')
+    df_c = pd.read_csv('../data/raw/clusters.csv')
+
+    df_t = transform_trips(df_t)
+    add_cluster(df_t, df_c).to_csv('../data/cleaned/cleaned_trips.csv', index=False)
