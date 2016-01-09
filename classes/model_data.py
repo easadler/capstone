@@ -5,13 +5,19 @@ from sklearn.ensemble import RandomForestRegressor as RFR
 
 class CreateModel(object):
     """docstring for CreateModel"""
-    def __init__(self, test=['all', 'season', 9], k_folds=False, model=RFC()):
+    def __init__(self, k_folds=False, model=RFC()):
 
 
-    def fit_transform(df, y='count'):
-        if self.add_feats:
-            engineer_feats(df)
+    def fit(X,y):
+        # fit the model with given data
+        pass
 
+    def predict(X,y):
+        pass
+
+
+    def score(X,y):
+        pass
 
 
 
@@ -31,9 +37,20 @@ class CreateModel(object):
 4. produce results 
 '''
 
+def split_data(df, how=False, split=0.25):
+    if how:
+        # get start month & traing & test size
+        pass
+        # return train_x, train_y, test_x, test_y
+    else:
+        # use train test split 
+        pass
+        # return train_x, train_y, test_x, test_y
+
+
 class EngineerFeats(object):
     """docstring for CreateModel"""
-    def __init__(self, test=['all', 'season', 9]):
+    def __init__(self, test='all'):
         self.feats
 
     def fit_transform(self, df):

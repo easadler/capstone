@@ -28,7 +28,9 @@ def transform_weather(df):
     df['datetime'] = rounded_time
 
     # Group by to remove duplicates
-    df = df.groupby(['datetime']).mean()
+    df = df.groupby(['datetime']).mean().reset_index()
+
+    df['hour'] = df['datetime'].map(lambda x: x.hour)
 
     return df
 
@@ -37,17 +39,21 @@ def transform_trips(df):
     # Drop unnecessary columns
     df = df.drop(['from_station_name', 'to_station_name', 'trip_id', 'stoptime', 'bikeid'], axis=1)
 
+    # Rename starttime to datetime
+    df = df.rename(columns={'starttime': 'datetime'})
+
     # Convert columns and create hour column
-    df['starttime'] = pd.to_datetime(df['starttime'])
+    df['datetime'] = pd.to_datetime(df['datetime'])
 
     # Convert tripduration to minutes
     df['tripduration'] = df['tripduration'] / float(60)
 
-    # Create hour column
-    df['hour'] = df['starttime'].map(lambda x: x.hour)
+    # Rount trip to nearest hour
+    rounded_time = map(round_to_hour, pd.to_datetime(df['datetime'], format='%Y%m%d%H%M'))
+    df['datetime'] = rounded_time
 
-    # rename starttime
-    df = df.rename(columns={'starttime': 'datetime'})
+    # Create hour column
+    df['hour'] = df['datetime'].map(lambda x: x.hour)
 
     # Remove closed station and pronto shop
     df = df.ix[(~df['from_station_id'].isin(['Pronto shop', 'UW-01'])) & (~df['to_station_id'].isin(['Pronto shop', 'UW-01'])), :]
@@ -56,9 +62,12 @@ def transform_trips(df):
 
 
 def add_cluster(df_t, df_c):
+    # Merge on terminal bike left from
     df = df_t.merge(df_c[['dockcount', 'elevation', 'cluster', 'ecosystem', 'terminal']], left_on='from_station_id', right_on='terminal',  how='left')
     df.drop('terminal', axis=1, inplace=True)
-    df = df.merge(df_c[['terminal', 'cluster', 'ecosystem']], left_on='to_station_id', right_on='terminal', suffixes=['_from', '_to'])
+
+    # Merge on terminal bike went to
+    df = df.merge(df_c[['dockcount', 'elevation', 'terminal', 'cluster', 'ecosystem']], left_on='to_station_id', right_on='terminal', suffixes=['_from', '_to'])
     df.drop('terminal', axis=1, inplace=True)
 
     return df
