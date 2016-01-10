@@ -58,6 +58,9 @@ def transform_trips(df):
     # Remove closed station and pronto shop
     df = df.ix[(~df['from_station_id'].isin(['Pronto shop', 'UW-01'])) & (~df['to_station_id'].isin(['Pronto shop', 'UW-01'])), :]
 
+    # Add count columns
+    df['count'] = 1
+
     return df
 
 
