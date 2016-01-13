@@ -27,9 +27,9 @@ The color scale slides between the colors, so use blended colors to indicate bet
 
 
 ### Forecasting Inventory
-![Forecasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png)
+![Forecasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png =100x20)
 
 ### Predictive Model
-![Predictive Model](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/predictivemodel.png)
+![Predictive Model](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/predictivemodel.png =100x20)
 
 
