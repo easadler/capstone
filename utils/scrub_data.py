@@ -12,6 +12,8 @@ def round_to_hour(x):
 
 
 def transform_weather(df):
+    df = df.copy()
+
     # Replace missing values as to NA.
     df = df.replace('\*+', np.nan, regex=True)
 
@@ -36,6 +38,8 @@ def transform_weather(df):
 
 
 def transform_trips(df):
+    df = df.copy()
+
     # Drop unnecessary columns
     df = df.drop(['from_station_name', 'to_station_name', 'trip_id', 'stoptime', 'bikeid'], axis=1)
 
@@ -65,6 +69,8 @@ def transform_trips(df):
 
 
 def add_cluster(df_t, df_c):
+    df_t, df_c = df_t.copy(), df_c.copy()
+
     # Merge on terminal bike left from
     df = df_t.merge(df_c[['dockcount', 'elevation', 'cluster', 'ecosystem', 'terminal']], left_on='from_station_id', right_on='terminal',  how='left')
     df.drop('terminal', axis=1, inplace=True)

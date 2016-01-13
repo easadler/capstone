@@ -3,6 +3,7 @@ import pandas as pd
 
 
 def remove_trip_outliers(df, duration=[3, 60], different_stations=True):
+    df = df.copy()
     # subset by min/max duration
     df = df.ix[(df['tripduration'] >= duration[0]) & (df['tripduration'] <= duration[1]), :]
 
@@ -13,6 +14,8 @@ def remove_trip_outliers(df, duration=[3, 60], different_stations=True):
 
 
 def subset_trips(df, eco_list=['Seattle'], usertypes=['Annual Member', 'Short-Term Pass Holder'], cols_to_drop=['gender', 'birthyear']):
+    df = df.copy()
+    
     eco_dict = {'Seattle': 0, 'Udist': 1, 'Outliers': -1}
     eco_list = [eco_dict[x] for x in eco_list]
 
@@ -29,12 +32,16 @@ def subset_trips(df, eco_list=['Seattle'], usertypes=['Annual Member', 'Short-Te
 
 
 def subset_weather(df, cols_to_drop=['DIR']):
+    df = df.copy()
+
     df.drop(cols_to_drop, axis=1, inplace=True)
 
     return df
 
 
 def groupby(df, index, column='to_station_id', hours=[0, 6, 10, 15, 19, 23]):
+    df = df.copy()
+
     # Grouby to get counts by hour
     df = df.groupby(['to_station_id', 'datetime'])['count'].sum().reset_index()
     df.rename(columns={'to_station_id': 'terminal'}, inplace=True)
@@ -59,6 +66,8 @@ def groupby(df, index, column='to_station_id', hours=[0, 6, 10, 15, 19, 23]):
 
 
 def groupby_weather(df, full_index, hours=[0, 6, 10, 15, 19, 23]):
+    df = df.copy()
+
     # Create base dateframe using index and merge with df
     df_b = pd.DataFrame(index=full_index).reset_index()
     df = df_b.merge(df, on='datetime')
@@ -76,6 +85,8 @@ def groupby_weather(df, full_index, hours=[0, 6, 10, 15, 19, 23]):
 
 
 def combine(df_t, df_w):
+    df_t, df_w = df_t.copy(), df_w.copy()
+
     # create index from weather datetime
     datetimes = df_w['datetime']
     terminals = df_t['from_station_id'].unique()
