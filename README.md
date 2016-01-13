@@ -28,8 +28,8 @@ Pronto released a data set containing every trip from their first year of busine
 Due to unbalanced classes, I used a data driven approach to bin hours (morning, commute to work,...). This drastically helped, however the counts needed to be binned as well. I first binned by zero bikes and 1 or more. This turned out to be almost 1:1. I then piped the stations predicted to have a ride into a model that will predict if the count is in the following bins: 1-2, 2-4, 5-8, 8-15. Here are my results:
 
 1. Classification AUC
- * demand: 0.86
- * supply: 0.82
+ * demand: 0.87
+ * supply: 0.86
 2. actual number Accuracy for 4 classes:
  * demand: 0.616
  * supply 0.614
