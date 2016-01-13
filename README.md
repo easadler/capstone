@@ -30,7 +30,7 @@ Due to unbalanced classes, I used a data driven approach to bin hours (morning, 
 1. Classification AUC
  * demand: 0.87
  * supply: 0.86
-2. actual number Accuracy for 4 classes:
+2. 4 Class Model Accuracy:
  * demand: 0.616
  * supply 0.614
 
