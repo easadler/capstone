@@ -2,7 +2,7 @@
 
 Hello! 
 
-My name is Evan and I am going to tell you about Pronto! Predicted, my capstone project.
+My name is Evan and I am going to breifly tell you about my capstone project, Pronto! Predicted.
 
 A few months ago, I returned to where I had locked my bike on the street only to find...a single tire! Instead of buying a new bicycle, I decided to give Seattle's cycle share, Pronto, a try. 
 
