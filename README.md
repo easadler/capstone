@@ -15,11 +15,12 @@ Pronto released a data set containing every trip from their first year of busine
 1. Aggregate over
  * date
  * [morning, commute to work, afternoon, commute home, night]
- * [starting station (demand), ending station (supply)]
-2. Impute date-times where there were no rentals
+ * starting station (demand) or ending station (supply)
+2. Impute zeros (date-times where there were no rentals)
 3. Get features 
  * Weather data (NOAA)
  * Elevations (Google API)
+ * Dockcounts
 4. Adding lags
  * month avg
  * day-of-week avg
