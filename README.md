@@ -24,12 +24,32 @@ The circles represent a unique station and the sizes of the circles represent th
 The color scale slides between the colors, so use blended colors to indicate between the three states above. At anytime, hover on a circle to get the station ID and predicted count.
 
 ## How it works
+I started with the [data](https://www.prontocycleshare.com/datachallenge) from Pronto's data competition. They provide 1-year of trips and meta information about each station.
 
+| date-time          | Starting Station | Ending Station |
+|--------------------|------------------|----------------|
+| 1/12/2015 8:00:00  | CH-04            | BS-01          |
+| 1/12/2015 11:00:00 | PS-02            | SLU-03         |
+
+I then transformed the data with the following steps in order to create a dataset for supply * a data set for demand:
+
+1. Scrub data
+2. Groupby by date, hour, ending station (supply) or starting station (demand)
+3. Impute date-times for every station with zero rentals 
+3. Bin hours to balance classes
+4. Create & Download Features:
+ * Create lagged variables
+ * Hourly weather data (NOAA)
+ * Elevations (Google API)
+5. Remove outliers
+
+*note*
+> I did not try to determine when rides were intended to enter or leave from a full or empty station. There is another data set, which I could use to help. Getting user ID's for each trip would be very useful for this problem a well. 
 
 ### Forecasting Inventory
-![Forecasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png =100x20)
+![Forecasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png)
 
 ### Predictive Model
-![Predictive Model](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/predictivemodel.png =100x20)
+![Predictive Model](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/predictivemodel.png)
 
 
