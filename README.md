@@ -13,6 +13,7 @@ I struck up a conversation with one of the dispatchers responsible for reshuffli
 After talking to their dispatcher, I realized that I could build a tool using predictive analytics to help Pronto with their reshuffling problem. 
 
 Pronto released a data set containing every trip from their first year of business, with the following format and variables. Since they contained, the date-time, starting station, and ending station, I could effectively model supply and demand by applying the following transformations: 
+
 1. Grouping by datetime & station leaving for demand (or station entering for supply)
 2. Imputting all times there were no bikes rented
 3. Getting hourly weather data and elevations
@@ -29,9 +30,16 @@ I then pipe the stations predicted to have a ride into a model that will predict
  * demand: 0.616
  * supply 0.614
 
-Most important variables:
+Consistantely most important variables:
 
-*
+* Lagged hour Average
+* Lagged day-of-week Average
+* Lagged month Average
+* Temperature 
+* Wind speed
+* Cloud coverage
+* Dew point
+
 For both supply and demand, an actual value of zero is correctly predicted 80% of the time (specificity). On the other hand, an actual value of one or more is correctly labeled as such 75% of the time (recall). Once a value is labeled 'one or more', placing it in one of the four bins has an accuracy of around 62%. Since these models are independently, I can take the product of 61.5% & 75% and say values greater than one are correctly predicted around 46% of the time. Considering that around 40% of misclassifications for second models were placing 3-4 bikes into the 1-2 bikes bucket and that there are 50% more 3 bikes, the majority of errors were only off by one bicycle. 
 
 
