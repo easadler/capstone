@@ -21,6 +21,7 @@ Pronto released a data set containing every trip from their first year of busine
 For both supply and demand, I first predict whether an number of bikes are rented or dropped off. This is to deal with the unbalanced classes. 
 
 I then pipe the stations predicted to have a ride into a model that will predict the actual number. My results are as follows:
+
 1. Classification AUC
  * demand: 0.86
  * supply: 0.82
@@ -28,6 +29,9 @@ I then pipe the stations predicted to have a ride into a model that will predict
  * demand: 0.616
  * supply 0.614
 
+Most important variables:
+
+*
 For both supply and demand, an actual value of zero is correctly predicted 80% of the time (specificity). On the other hand, an actual value of one or more is correctly labeled as such 75% of the time (recall). Once a value is labeled 'one or more', placing it in one of the four bins has an accuracy of around 62%. Since these models are independently, I can take the product of 61.5% & 75% and say values greater than one are correctly predicted around 46% of the time. Considering that around 40% of misclassifications for second models were placing 3-4 bikes into the 1-2 bikes bucket and that there are 50% more 3 bikes, the majority of errors were only off by one bicycle. 
 
 
