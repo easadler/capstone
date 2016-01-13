@@ -12,10 +12,18 @@ It turns out that the Pronto dispatchers are having a hard time anticipating the
 
 Pronto released a data set containing every trip from their first year of business, with the following format and variables. Since they contained, the date-time, starting station, and ending station, I could effectively model supply and demand by applying the following transformations:
 
-1. Sum by date, [morning, commute to work, afternoon, commute home, night], [starting station (demand), ending station (supply)]
+1. Aggregate over
+ * date
+ * [morning, commute to work, afternoon, commute home, night]
+ * [starting station (demand), ending station (supply)]
 2. Impute date-times where there were no rentals
-3. Get hourly weather data and elevations (NOAA, Google API)
-4. Adding various lags from the previous month (month avg, day-of-week avg, hour average)
+3. Get features 
+ * Weather data (NOAA)
+ * Elevations (Google API)
+4. Adding lags
+ * month avg
+ * day-of-week avg
+ * hour average
 
 Due to unbalanced classes, I used a data driven approach to bin hours (morning, commute to work,...). This drastically helped, however the counts needed to be binned as well. I first binned by zero bikes and 1 or more. This turned out to be almost 1:1. I then piped the stations predicted to have a ride into a model that will predict if the count is in the following bins: 1-2, 2-4, 5-8, 8-15. Here are my results:
 
