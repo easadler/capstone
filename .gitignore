@@ -1,6 +1,5 @@
 *.ipynb_checkpoints
 *.csv
-*.txt
 *.DS_Store
 /MISC/
-/presentation/images/
+/presentation/
