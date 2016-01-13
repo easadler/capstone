@@ -43,8 +43,8 @@ def groupby(df, index, column='to_station_id', hours=[0, 6, 10, 15, 19, 23]):
     df = df.copy()
 
     # Grouby to get counts by hour
-    df = df.groupby(['to_station_id', 'datetime'])['count'].sum().reset_index()
-    df.rename(columns={'to_station_id': 'terminal'}, inplace=True)
+    df = df.groupby([column, 'datetime'])['count'].sum().reset_index()
+    df.rename(columns={column: 'terminal'}, inplace=True)
 
     # Create base dateframe using index and merge with df
     df_b = pd.DataFrame(index=index).reset_index()
@@ -115,17 +115,24 @@ def combine(df_t, df_w):
 
 
 if __name__ == '__main__':
-    df_t = pd.read_csv('../data/cleaned/cleaned_trips.csv', parse_dates=['datetime'], infer_datetime_format=True)
+    # df_t = pd.read_csv('../data/cleaned/cleaned_trips.csv', parse_dates=['datetime'], infer_datetime_format=True)
     # df_t = subset_trips(remove_trip_outliers(df_t))
     # df_t.to_csv('../data/cleaned/cleaned_trips.csv', index=False)
-    df_w = pd.read_csv('../data/cleaned/cleaned_weather.csv', parse_dates=['datetime'], infer_datetime_format=True)
+    # df_w = pd.read_csv('../data/cleaned/cleaned_weather.csv', parse_dates=['datetime'], infer_datetime_format=True)
     # df_w = subset_weather(df_w)
     # df_w.to_csv('../data/cleaned/cleaned_weather.csv', index=False)
+
+    df_w = pd.read_csv('../data/cleaned/cleaned_weather.csv', parse_dates=['datetime'], infer_datetime_format=True)
+
+    df_t = pd.read_csv('../data/cleaned/cleaned_trips.csv', parse_dates=['datetime'], infer_datetime_format=True)
+
     df_t['count'] = 1
 
     df_d, df_s = combine(df_t, df_w)
 
     df_d.to_csv('../data/final/demand_all_features.csv', index=False)
     df_s.to_csv('../data/final/supply_all_features.csv', index=False)
+
+
 
 
