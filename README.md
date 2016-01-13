@@ -7,7 +7,7 @@ Pronto! Predicted was built to help Seattle's cycle sharing program better reshu
 
 ## Pronto! Predicting
 
-Let's see how the application works. Using Pronto's JSON feed to get the number of available bikes at each station and scraping hourly weather forcasts, Pronto! Predicted is already prepared to predict the fucture as soon as it loads. 
+Let's see how the application works. Using Pronto's JSON feed to get the number of available bikes at each station and scraping hourly weather forecasts, Pronto! Predicted is already prepared to predict the future as soon as it loads. 
 
 When you arrive on the website, you will have the option to look four time periods ahead. Then click "Go!".
 
@@ -16,7 +16,7 @@ When you arrive on the website, you will have the option to look four time perio
 After you click "Go!" the circles will shift according to there predicted size. 
 
 ### Interpreting the Map
-The circles represent a unique station and the sizes of the circles represent the number of bikes currently docked at a station. The are comparable across all stations, no matter the number of docks at a station. On the other hand, the colors represent how full each station is relative to the number of viable available docks. The colors mean as follows:
+The circles represent a unique station and the sizes of the circles represent the number of bikes currently docked at a station. They are comparable across all stations, no matter the number of docks at a station. On the other hand, the colors represent how full each station is relative to the number of viable available docks. The colors mean as follows:
 * Blue: Full
 * Green: 50% full
 * Red: empty
@@ -26,9 +26,10 @@ The color scale slides between the colors, so use blended colors to indicate bet
 ## How it works
 
 
-### Forcasting Inventory
-![Forcasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png)
+### Forecasting Inventory
+![Forecasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png)
 
 ### Predictive Model
 ![Predictive Model](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/predictivemodel.png)
+
 
