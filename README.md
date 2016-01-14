@@ -46,7 +46,7 @@ I then transformed the data with the following steps in order to create a datase
 *note*
 > I did not try to determine when rides were intended to enter or leave from a full or empty station. There is another data set, which I could use to help. Getting user ID's for each trip would be very useful for this problem a well. 
 
-I then train my models using the data sets provided. First I use a binary classfier to classify if a ride occured, then pipe all the predicted rides over to a 4 way classifier, which is trained on the subset of the data with positive rides. The following images outline the models:
+I then train my models using the data sets that I created. First, I use a binary classfier to classify if a ride occured, then pipe all the predicted rides over to a 4 way classifier, which is trained on the subset of the data with positive rides. The following images outline the models:
 
 ### Forecasting Inventory
 ![Forecasting Method](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/forcastingmodel.png)
@@ -54,4 +54,6 @@ I then train my models using the data sets provided. First I use a binary classf
 ### Predictive Model
 ![Predictive Model](https://raw.githubusercontent.com/easadler/capstone/master/presentation/images/predictivemodel.png)
 
-
+### Scoring Model
+* The binary classifiers had AUC's of approximately 0.85.
+* The 4-way classifiers had accuracies of approximately 62%
