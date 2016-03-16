@@ -98,24 +98,3 @@ if __name__ == '__main__':
     df_d = pd.read_csv('../data/final/demand_all_features.csv', parse_dates=['date'], infer_datetime_format=True)
     ef = EngineerFeats()
     print ef.fit_transform(df_d)
-
-
-
-# def fit(self, df):
-#     # Get dow & month features
-#     df['dow'] = map(lambda x: x.dayofweek, df['date'])
-#     df['month'] = map(lambda x: x.month, df['date'])
-
-#     # Get dictionaries of average values
-#     hour_average = df.groupby(['hour', 'terminal'])['count'].mean().reset_index()
-#     hour_average.columns = ['hour', 'terminal', 'hour_avg']
-#     self.ha_dict = hour_average.pivot(index='hour', columns='terminal', values='hour_avg').to_dict()
-
-#     month_average = df.groupby(['month', 'terminal'])['count'].mean().reset_index()
-#     month_average.columns = ['month', 'terminal', 'month_avg']
-#     self.ma_dict = month_average.pivot(index='month', columns='terminal', values='month_avg').to_dict()
-
-#     dow_average = df.groupby(['dow', 'terminal'])['count'].mean().reset_index()
-#     dow_average.columns = ['dow', 'terminal', 'dow_avg']
-#     self.da_dict = dow_average.pivot(index='dow', columns='terminal', values='dow_avg').to_dict()
-
